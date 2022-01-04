@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "incremental": true,
+    "esModuleInterop": true,
+    "types": ["node"],
+    "declaration": true,
+    "isolatedModules": true
+  },
+  "ts-node": {
+    "transpileOnly": true,
+    "compilerOptions": {
+      "isolatedModules": false
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

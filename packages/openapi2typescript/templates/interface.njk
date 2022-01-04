@@ -1,0 +1,28 @@
+{% if buildForSinglePackage !== true %}
+  declare namespace {{ namespace }} {
+{% endif %}
+  {% for type in list -%}
+{%- if type.props.length %}
+  {%- if buildForSinglePackage %} export {%- endif %} type {{ type.typeName | safe }} =
+  {%- for prop in type.props %}
+     {%- if (prop[0].$ref !== undefined) and (prop | length === 1) %}
+      {{ prop[0].type }}
+     {%- else %}
+     {
+     {%- for p in prop %}
+      {%- if p.desc %}
+      /** {{ p.desc }} */
+      {%- endif %}
+      '{{ p.name }}'{{ '' if p.required else '?' }}: {{ p.type | safe }};
+     {%- endfor %}
+     }
+     {%- endif %}
+    {{ '' if loop.last === true else ' & '  }}
+  {%- endfor %}
+{%- else %}
+  type {{ type.typeName | safe }} = {{ type.type }};
+{%- endif %}
+{% endfor %}
+{% if buildForSinglePackage !== true %}
+    }
+{% endif %}
