@@ -5,6 +5,12 @@
   "keywords": [
     "openapi"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
   "author": "laoxubuer <cheerxl@hotmail.com>",
   "homepage": "https://github.com/laoxubuer/openapi2typescript-monorepo#readme",
   "license": "MIT",

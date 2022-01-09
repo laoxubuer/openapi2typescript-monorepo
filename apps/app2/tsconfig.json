@@ -1,8 +1,9 @@
 {
-  "extends": "../tsconfig.packages.json",
+  "extends": "../../packages/tsconfig.packages.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "isolatedModules": false
   },
   "exclude": ["dist", "node_modules"],
   "include": [
