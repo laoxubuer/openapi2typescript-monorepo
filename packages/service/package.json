@@ -25,6 +25,9 @@
     "type": "git",
     "url": "git+https://github.com/laoxubuer/openapi2typescript-monorepo.git"
   },
+  "dependencies": {
+    "umi-request": "^1.4.0"
+  },
   "scripts": {
     "dev": "rimraf ./dist/ && tsc -w",
     "build": "rimraf ./dist/ && tsc --build",

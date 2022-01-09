@@ -1,161 +1,107 @@
-export type AccountLoginReq = {
-  /** 验证码 */
-  captcha?: string;
-  /** 验证码ID */
-  captchaId?: number;
-  /** 验证令牌 */
-  captchaToken?: string;
-  /** 密码(客户端使用 “墙]・▽・)ノ 嗨,美女+密码” 的MD5值提交，32位小写) */
-  password: string;
-  /** 用户名 */
-  username: string;
+export type CurrentUser = {
+  name?: string;
+  avatar?: string;
+  userid?: string;
+  email?: string;
+  signature?: string;
+  title?: string;
+  group?: string;
+  tags?: { key?: string; label?: string }[];
+  notifyCount?: number;
+  unreadCount?: number;
+  country?: string;
+  access?: string;
+  geographic?: {
+    province?: { label?: string; key?: string };
+    city?: { label?: string; key?: string };
+  };
+  address?: string;
+  phone?: string;
 };
 
-export type AccountRegisterReq = {
-  /** 验证码 */
-  captcha?: string;
-  /** 验证码ID */
-  captchaId: number;
-  /** 验证令牌 */
-  captchaToken?: string;
-  /** 密码(输入的密码，需要检测密码是否合法) */
-  password: string;
-  /** 用户名 */
-  username: string;
+export type LoginResult = {
+  status?: string;
+  type?: string;
+  currentAuthority?: string;
 };
 
-type ApiReq = true;
-export type ApiResCaptchaTokenVO = {
-  /** 状态码；大于零为处理成功的不同状态，小于零的状态则视为失败的情况 */
-  code: number;
-  /** 相应数据 */
-  data?: CaptchaTokenVO;
-  /** 提示消息 */
-  msg: string;
-  /** 消息提示方式 */
-  showType:
-    | 'DIALOG'
-    | 'ERROR'
-    | 'NOTIFICATION'
-    | 'PAGE'
-    | 'SLIENT'
-    | 'SUCCESS'
-    | 'UNUSED_6'
-    | 'UNUSED_7'
-    | 'UNUSED_8'
-    | 'WARN';
+export type PageParams = {
+  current?: number;
+  pageSize?: number;
 };
 
-export type ApiResImgCaptchaDTO = {
-  /** 状态码；大于零为处理成功的不同状态，小于零的状态则视为失败的情况 */
-  code: number;
-  /** 相应数据 */
-  data?: ImgCaptchaDTO;
-  /** 提示消息 */
-  msg: string;
-  /** 消息提示方式 */
-  showType:
-    | 'DIALOG'
-    | 'ERROR'
-    | 'NOTIFICATION'
-    | 'PAGE'
-    | 'SLIENT'
-    | 'SUCCESS'
-    | 'UNUSED_6'
-    | 'UNUSED_7'
-    | 'UNUSED_8'
-    | 'WARN';
+export type RuleListItem = {
+  key?: number;
+  disabled?: boolean;
+  href?: string;
+  avatar?: string;
+  name?: string;
+  owner?: string;
+  desc?: string;
+  callNo?: number;
+  status?: number;
+  updatedAt?: string;
+  createdAt?: string;
+  progress?: number;
 };
 
-export type ApiResTokenDTO = {
-  /** 状态码；大于零为处理成功的不同状态，小于零的状态则视为失败的情况 */
-  code: number;
-  /** 相应数据 */
-  data?: TokenDTO;
-  /** 提示消息 */
-  msg: string;
-  /** 消息提示方式 */
-  showType:
-    | 'DIALOG'
-    | 'ERROR'
-    | 'NOTIFICATION'
-    | 'PAGE'
-    | 'SLIENT'
-    | 'SUCCESS'
-    | 'UNUSED_6'
-    | 'UNUSED_7'
-    | 'UNUSED_8'
-    | 'WARN';
+export type RuleList = {
+  data?: RuleListItem[];
+  /** 列表的内容总数 */
+  total?: number;
+  success?: boolean;
 };
 
-export type ApiResboolean = {
-  /** 状态码；大于零为处理成功的不同状态，小于零的状态则视为失败的情况 */
-  code: number;
-  /** 相应数据 */
-  data?: boolean;
-  /** 提示消息 */
-  msg: string;
-  /** 消息提示方式 */
-  showType:
-    | 'DIALOG'
-    | 'ERROR'
-    | 'NOTIFICATION'
-    | 'PAGE'
-    | 'SLIENT'
-    | 'SUCCESS'
-    | 'UNUSED_6'
-    | 'UNUSED_7'
-    | 'UNUSED_8'
-    | 'WARN';
+export type FakeCaptcha = {
+  code?: number;
+  status?: string;
 };
 
-export type CaptchaTokenVO = {
-  /** 验证令牌 */
-  token: string;
+export type LoginParams = {
+  username?: string;
+  password?: string;
+  autoLogin?: boolean;
+  type?: string;
 };
 
-export type CheckImgCaptchaReq = {
-  /** 验证码 */
-  captcha: string;
-  /** 验证码ID */
-  id: number;
-  /** 验证码类型，1->注册，2->登录，3->忘记密码，4->修改密码 */
-  type: 'EDIT_PASSWORD' | 'FORGOT_PASSWORD' | 'LOGIN' | 'REGISTER';
+export type ErrorResponse = {
+  /** 业务约定的错误码 */
+  errorCode: string;
+  /** 业务上的错误信息 */
+  errorMessage?: string;
+  /** 业务上的请求是否成功 */
+  success?: boolean;
 };
 
-export type EditPasswordReq = {
-  /** 新密码 */
-  newPassword: string;
-  /** 当前的密码 */
-  password: string;
-  /** 用户通行令牌 */
-  token: string;
-  /** 用户ID */
-  uid: number;
+export type NoticeIconList = {
+  data?: NoticeIconItem[];
+  /** 列表的内容总数 */
+  total?: number;
+  success?: boolean;
 };
 
-export type ImgCaptchaDTO = {
-  /** 验证码ID */
-  id: number;
-  /** 图片验证码URL */
-  url: string;
+type NoticeIconItemType = 'notification' | 'message' | 'event';
+export type NoticeIconItem = {
+  id?: string;
+  extra?: string;
+  key?: string;
+  read?: boolean;
+  avatar?: string;
+  title?: string;
+  status?: string;
+  datetime?: string;
+  description?: string;
+  type?: NoticeIconItemType;
 };
 
-export type ImgCaptchaReq = {
-  /** 验证码类型 */
-  type: 'EDIT_PASSWORD' | 'FORGOT_PASSWORD' | 'LOGIN' | 'REGISTER';
+export type getFakeCaptchaParams = {
+  /** 手机号 */
+  phone?: string;
 };
 
-export type LoginIsNeedCaptchaReq = {
-  /** 用户名 */
-  username: string;
-};
-
-export type TokenDTO = {
-  /** 通行令牌 */
-  accessToken: string;
-  /** 刷新令牌 */
-  refreshToken: string;
-  /** 用户ID */
-  userId: number;
+export type ruleParams = {
+  /** 当前的页码 */
+  current?: number;
+  /** 页面的容量 */
+  pageSize?: number;
 };

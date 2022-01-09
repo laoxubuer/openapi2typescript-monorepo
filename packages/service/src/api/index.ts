@@ -2,9 +2,11 @@
 /* eslint-disable */
 // API 更新时间：
 // API 唯一标识：
-import * as Captcha from './Captcha';
-import * as UserAccount from './UserAccount';
+import * as api from './api';
+import * as login from './login';
+import * as rule from './rule';
 export default {
-  Captcha,
-  UserAccount,
+  api,
+  login,
+  rule,
 };
